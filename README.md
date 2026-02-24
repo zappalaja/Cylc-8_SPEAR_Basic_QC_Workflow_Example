@@ -35,7 +35,26 @@ pr_6hr_GFDL-SPEAR-MED_historical_*.nc
 ---
 
 ## Installation
-
+- Clone the repo:
 ```bash
+git clone <repo_link>
+```
+- Create and activate the cylc env:
+```bash
+cd Cylc-8_SPEAR_Basic_QC_Workflow_Example/cylc-src/spear-qc-demo
 conda env create -f environment.yml
 conda activate spear-qc
+```
+- Edit flow.cylc as needed (edit input file name/location)
+
+Run it:
+```bash
+cylc validate .
+cylc install --workflow-name=spear-qc-demo .
+cylc play spear-qc-demo
+```
+
+Check live progress of tasks with: 
+```bash
+cylc tui spear-qc-demo/run1
+```
