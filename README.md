@@ -58,3 +58,17 @@ Check live progress of tasks with:
 ```bash
 cylc tui spear-qc-demo/run1
 ```
+
+- Output (like report.txt) written to:
+```bash
+~/cylc-run/spear-qc/runN/work/
+```
+- To stop a run:
+```bash
+cylc stop --now spear-qc-demo/runN
+```
+
+- To clean (needed before restarting, removes previous run output and logs)
+```bash
+cylc clean spear-qc-demo/runN
+```
