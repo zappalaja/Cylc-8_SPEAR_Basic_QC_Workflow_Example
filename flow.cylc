@@ -1,0 +1,119 @@
+#!cylc
+
+[scheduler]
+    UTC mode = True
+    allow implicit tasks = True
+
+[meta]
+    title = SPEAR QC Demo (metadata -> rogue pixel scan -> report -> package)
+
+[scheduling]
+    initial cycle point = 1
+    final cycle point = 1
+
+    [[graph]]
+        R1 = """
+            setup => metadata_qc => scan_rogue_pixels => summarize => gate => package
+        """
+
+[runtime]
+    [[root]]
+        pre-script = """
+            source ~/miniconda3/etc/profile.d/conda.sh
+            conda activate cylc
+        """
+
+        script = """
+            echo "ERROR: root task ran unexpectedly"
+            exit 1
+        """
+
+        [[[environment]]]
+            QC_INPUT_FILE = "/home/zappalaj/zarr_test/netcdf/pr_6hr_GFDL-SPEAR-MED_historical_r1i1p1f1_gr3_192101010300-193012312100.nc"
+            QC_VAR  = "pr"
+            QC_LAT  = "lat"
+            QC_LON  = "lon"
+            QC_TIME = "time"
+            QC_THRESHOLD_MM6HR = "50.0" #typically 250
+            QC_GATE_MODE = "pass"
+            OMP_NUM_THREADS = "1"
+            MKL_NUM_THREADS = "1"
+
+
+    [[setup]]
+        script = """
+            set -euo pipefail
+            cd "${CYLC_WORKFLOW_RUN_DIR}"
+            mkdir -p work outputs logs
+
+            if [ ! -f "${QC_INPUT_FILE}" ]; then
+              echo "ERROR: input file not found: ${QC_INPUT_FILE}" >&2
+              exit 1
+            fi
+
+            cat > work/config.yaml <<YAML
+input_file: "${QC_INPUT_FILE}"
+variable_name: "${QC_VAR}"
+lat_dim: "${QC_LAT}"
+lon_dim: "${QC_LON}"
+time_dim: "${QC_TIME}"
+
+threshold_mm_6hr: ${QC_THRESHOLD_MM6HR}
+
+output_directory: "${CYLC_WORKFLOW_RUN_DIR}/outputs"
+log_file: "${CYLC_WORKFLOW_RUN_DIR}/logs/qc.log"
+
+plot_settings:
+  figure_size: [12, 6]
+  cmap: "viridis"
+  dpi: 150
+YAML
+
+            echo "[setup] wrote work/config.yaml"
+            ls -lh work/config.yaml
+        """
+
+    [[metadata_qc]]
+        script = """
+            set -euo pipefail
+            cd "${CYLC_WORKFLOW_RUN_DIR}"
+            python scripts/metadata_qc.py work/config.yaml work/metadata.json
+            echo "[metadata_qc] wrote work/metadata.json"
+        """
+
+    [[scan_rogue_pixels]]
+        script = """
+            set -euo pipefail
+            cd "${CYLC_WORKFLOW_RUN_DIR}"
+            python scripts/scan_rogue_pixels.py work/config.yaml work/alerts.json
+            echo "[scan_rogue_pixels] wrote work/alerts.json"
+        """
+
+    [[summarize]]
+        script = """
+            set -euo pipefail
+            cd "${CYLC_WORKFLOW_RUN_DIR}"
+            python scripts/summarize.py work/config.yaml work/metadata.json work/alerts.json work/report.txt
+            echo "[summarize] wrote work/report.txt"
+            sed -n '1,120p' work/report.txt
+        """
+
+    [[gate]]
+        script = """
+            set -euo pipefail
+            cd "${CYLC_WORKFLOW_RUN_DIR}"
+            python scripts/gate.py work/alerts.json "${QC_GATE_MODE}"
+        """
+
+    [[package]]
+        script = """
+            set -euo pipefail
+            cd "${CYLC_WORKFLOW_RUN_DIR}"
+            mkdir -p work/artifacts
+            cp -v work/config.yaml work/metadata.json work/alerts.json work/report.txt work/artifacts/ 2>/dev/null || true
+            cp -v outputs/*.png work/artifacts/ 2>/dev/null || true
+            cp -v logs/* work/artifacts/ 2>/dev/null || true
+            tar -czf work/qc_artifacts.tgz -C work artifacts
+            echo "[package] wrote work/qc_artifacts.tgz"
+            ls -lh work/qc_artifacts.tgz
+        """

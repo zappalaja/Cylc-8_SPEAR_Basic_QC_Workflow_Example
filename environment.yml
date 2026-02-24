@@ -1,0 +1,11 @@
+name: spear-qc
+channels:
+  - conda-forge
+dependencies:
+  - python=3.11
+  - netcdf4
+  - numpy
+  - matplotlib
+  - cartopy
+  - pyyaml
+  - cylc-flow
