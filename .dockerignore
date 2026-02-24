@@ -1,0 +1,10 @@
+**/__pycache__/
+**/*.pyc
+**/*.pyo
+.service/
+log/
+work/
+outputs/
+run*/
+*.nc
+*.tgz
