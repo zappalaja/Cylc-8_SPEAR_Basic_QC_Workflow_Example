@@ -1,0 +1,20 @@
+# Cylc runtime
+cylc-run/
+run*/
+work/
+outputs/
+log/
+.service/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+
+# System
+.DS_Store
+
+# Large data
+*.nc
+*.tgz
