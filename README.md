@@ -1,5 +1,3 @@
-# Cylc-8_SPEAR_Basic_QC_Workflow_Example
-
 # SPEAR 6-Hour Precipitation Basic QC Demo/Example
 
 A Cylc 8 workflow demonstrating automated quality control (QC) on
