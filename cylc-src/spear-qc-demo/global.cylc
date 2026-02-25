@@ -1,0 +1,7 @@
+[install]
+    [[symlink dirs]]
+        [[[localhost]]]
+            run = /work/Jake.Zappala/cylc-run
+            work = /work/Jake.Zappala/cylc-run
+            log = /work/Jake.Zappala/cylc-run
+            share = /work/Jake.Zappala/cylc-run
