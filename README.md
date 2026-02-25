@@ -34,27 +34,52 @@ pr_6hr_GFDL-SPEAR-MED_historical_*.nc
 
 ---
 
-## Installation
-- Clone the repo:
+## Installation and Setup (On Workstation)
+- On your workstation, clone the repo:
 ```bash
 git clone <repo_link>
 ```
-- Create and activate the cylc env:
+- Activate Conda:
 ```bash
-cd Cylc-8_SPEAR_Basic_QC_Workflow_Example/cylc-src/spear-qc-demo
-conda env create -f environment.yml
-conda activate spear-qc
+module load conda
 ```
-- Edit flow.cylc as needed (edit input file name/location)
 
-Run it:
+-  Create and activate the cylc env:
+```bash
+conda create -n spear-qc-demo -y -c conda-forge python=3.11 
+conda activate spear-qc-demo 
+```
+- Install Packages:
+```bash
+conda install -y -c conda-forge mamba
+mamba install -y -c conda-forge cylc-flow netcdf4 numpy pyyaml matplotlib cartopy 
+```
+
+- Edit flow.cylc as needed (edit input file name/location, QC thresold value, etc.)
+
+- Make cylc-run directory in /work
+```bash
+mkdir -p /work/FIRST.LAST/cylc-run
+```
+
+- Make cylc config directory
+```bash
+mkdir -p ~/.cylc/flow
+```
+
+- Move example cylc config file to the cylc config directory, modify as needed:
+```bash
+mv /path/to/file/config ~/.cylc/flow
+```
+
+- Run it:
 ```bash
 cylc validate .
 cylc install --workflow-name=spear-qc-demo .
 cylc play spear-qc-demo
 ```
 
-Check live progress of tasks with: 
+- Check live progress of tasks with: 
 ```bash
 cylc tui spear-qc-demo/run1
 ```
@@ -71,4 +96,13 @@ cylc stop --now spear-qc-demo/runN
 - To clean (needed before restarting, removes previous run output and logs)
 ```bash
 cylc clean spear-qc-demo/runN
+```
+
+- Output PNGs are located here:
+```bash
+/work/FIRST.LAST/cylc-run/cylc-run/spear-qc-demo/run1/outputs
+```
+- Output report.txt file is located here:
+```bash
+/work/FIRST.LAST/cylc-run/cylc-run/spear-qc-demo/run1/work
 ```
