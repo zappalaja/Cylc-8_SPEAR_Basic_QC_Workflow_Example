@@ -12,7 +12,7 @@ This workflow performs:
 1. Metadata validation
 2. Rogue pixel threshold detection
 3. Optional alert plot generation
-4. Automated reporting and packaging
+4. Automated reporting and output file creation
 
 Just a ightweight reproducible example of model output QC!
 
@@ -20,7 +20,7 @@ Just a ightweight reproducible example of model output QC!
 
 ### Workflow Structure
 
-setup → metadata_qc → scan_rogue_pixels → summarize → gate → package
+setup → metadata_qc → scan_rogue_pixels → summarize → create output files
 
 ---
 
