@@ -5,7 +5,7 @@
 A Cylc 8 workflow demonstrating automated quality control (QC) on
 GFDL-SPEAR-MED 6-hour precipitation output.
 
-## Overview
+### Overview
 
 This workflow performs:
 
@@ -18,13 +18,13 @@ Just a ightweight reproducible example of model output QC!
 
 ---
 
-## Workflow Structure
+### Workflow Structure
 
 setup → metadata_qc → scan_rogue_pixels → summarize → gate → package
 
 ---
 
-## Example Dataset
+### Example Dataset
 
 This demo expects a NetCDF file such as:
 
@@ -34,38 +34,38 @@ pr_6hr_GFDL-SPEAR-MED_historical_*.nc
 
 ---
 
-## Installation and Setup (On Workstation)
-# On your workstation, clone the repo:
+# Installation and Setup (On Workstation)
+### On your workstation, clone the repo:
 ```bash
 git clone <repo_link>
 ```
-# Load Conda:
+### Load Conda:
 ```bash
 module load conda
 ```
 
-# Create and activate the cylc env:
+### Create and activate the cylc env:
 ```bash
 conda create -n spear-qc-demo -y -c conda-forge python=3.11 
 conda activate spear-qc-demo 
 ```
-# Install Packages:
+### Install Packages:
 ```bash
 conda install -y -c conda-forge mamba
 mamba install -y -c conda-forge cylc-flow netcdf4 numpy pyyaml matplotlib cartopy 
 ```
 
-# Edit flow.cylc as needed (edit input file name/location, QC thresold value, etc.)
+### Edit flow.cylc as needed (edit input file name/location, QC thresold value, etc.)
 ```bash
 vi /path/flow.cylc
 ```
 
-# Create cylc-run directory in /work
+### Create cylc-run directory in /work
 ```bash
 mkdir -p /work/FIRST.LAST/cylc-run
 ```
 
-# Create cylc config directory
+### Create cylc config directory
 ```bash
 mkdir -p ~/.cylc/flow
 ```
