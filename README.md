@@ -87,10 +87,6 @@ cylc play spear-qc-demo
 cylc tui spear-qc-demo/run1
 ```
 
-### 11. Output (like report.txt) written to:
-```bash
-~/cylc-run/spear-qc/runN/work/
-```
 ### 12. To stop a run:
 ```bash
 cylc stop --now spear-qc-demo/runN
