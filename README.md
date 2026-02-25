@@ -75,19 +75,20 @@ mkdir -p ~/.cylc/flow
 cp Cylc-8_SPEAR_Basic_QC_Workflow_Example/cylc-src/spear-qc-demo/global.cylc ~/.cylc/flow
 ```
 
-### 9. Run it:
+# Run it (On PPAN): 
 ```bash
+cd Cylc-8_SPEAR_Basic_QC_Workflow_Example/cylc-src/spear-qc-demo/
 cylc validate .
 cylc install --workflow-name=spear-qc-demo .
 cylc play spear-qc-demo
 ```
 
-### 10. Check live progress of tasks with: 
+### Check live progress of tasks with: 
 ```bash
 cylc tui spear-qc-demo/run1
 ```
 
-### 11. To stop a failed or problematic run:
+### To stop a failed or problematic run:
 ```bash
 cylc stop --now spear-qc-demo/runN
 ```
@@ -96,16 +97,16 @@ cylc stop --now spear-qc-demo/runN
 cylc stop --kill spear-qc-demo/runN
 ```
 
-### 12. To clean the run directory (needed before restarting, removes previous run output and logs)
+### To clean the run directory (needed before restarting, removes previous run output and logs)
 ```bash
 cylc clean spear-qc-demo/runN
 ```
 
-### 13. Output PNGs are located here:
+### Output PNGs are located here:
 ```bash
 /work/FIRST.LAST/cylc-run/cylc-run/spear-qc-demo/run1/outputs
 ```
-### 14. Output report.txt file is located here:
+### Output report.txt file is located here:
 ```bash
 /work/FIRST.LAST/cylc-run/cylc-run/spear-qc-demo/run1/work
 ```
