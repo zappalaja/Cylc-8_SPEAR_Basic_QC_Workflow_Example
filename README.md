@@ -75,7 +75,7 @@ mkdir -p ~/.cylc/flow
 cp Cylc-8_SPEAR_Basic_QC_Workflow_Example/cylc-src/spear-qc-demo/global.cylc ~/.cylc/flow
 ```
 
-# Run it (On PPAN): 
+# Running the Cylc Workflow (On PPAN): 
 ```bash
 cd Cylc-8_SPEAR_Basic_QC_Workflow_Example/cylc-src/spear-qc-demo/
 cylc validate .
