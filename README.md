@@ -87,21 +87,25 @@ cylc play spear-qc-demo
 cylc tui spear-qc-demo/run1
 ```
 
-### 12. To stop a run:
+### 11. To stop a failed or problematic run:
 ```bash
 cylc stop --now spear-qc-demo/runN
 ```
+#### or
+```bash
+cylc stop --kill spear-qc-demo/runN
+```
 
-### 13. To clean (needed before restarting, removes previous run output and logs)
+### 12. To clean the run directory (needed before restarting, removes previous run output and logs)
 ```bash
 cylc clean spear-qc-demo/runN
 ```
 
-### 14. Output PNGs are located here:
+### 13. Output PNGs are located here:
 ```bash
 /work/FIRST.LAST/cylc-run/cylc-run/spear-qc-demo/run1/outputs
 ```
-### 15. Output report.txt file is located here:
+### 14. Output report.txt file is located here:
 ```bash
 /work/FIRST.LAST/cylc-run/cylc-run/spear-qc-demo/run1/work
 ```
