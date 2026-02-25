@@ -35,41 +35,44 @@ pr_6hr_GFDL-SPEAR-MED_historical_*.nc
 ---
 
 ## Installation and Setup (On Workstation)
-- On your workstation, clone the repo:
+# On your workstation, clone the repo:
 ```bash
 git clone <repo_link>
 ```
-- Activate Conda:
+# Load Conda:
 ```bash
 module load conda
 ```
 
--  Create and activate the cylc env:
+# Create and activate the cylc env:
 ```bash
 conda create -n spear-qc-demo -y -c conda-forge python=3.11 
 conda activate spear-qc-demo 
 ```
-- Install Packages:
+# Install Packages:
 ```bash
 conda install -y -c conda-forge mamba
 mamba install -y -c conda-forge cylc-flow netcdf4 numpy pyyaml matplotlib cartopy 
 ```
 
-- Edit flow.cylc as needed (edit input file name/location, QC thresold value, etc.)
+# Edit flow.cylc as needed (edit input file name/location, QC thresold value, etc.)
+```bash
+vi /path/flow.cylc
+```
 
-- Make cylc-run directory in /work
+# Create cylc-run directory in /work
 ```bash
 mkdir -p /work/FIRST.LAST/cylc-run
 ```
 
-- Make cylc config directory
+# Create cylc config directory
 ```bash
 mkdir -p ~/.cylc/flow
 ```
 
-- Move example cylc config file to the cylc config directory, modify as needed:
+- Copy example cylc config file to the cylc config directory, modify as needed:
 ```bash
-mv /path/to/file/config ~/.cylc/flow
+cp /path/to/file/config/global.cylc ~/.cylc/flow
 ```
 
 - Run it:
