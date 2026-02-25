@@ -12,7 +12,7 @@ This workflow performs:
 3. Optional alert plot generation
 4. Automated reporting and output file creation
 
-Just a ightweight reproducible example of model output QC!
+Just a lightweight reproducible example of model output QC, designed to act as a template for our future SPEAR QC automation.
 
 ---
 
