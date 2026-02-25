@@ -55,7 +55,7 @@ conda install -y -c conda-forge mamba
 mamba install -y -c conda-forge cylc-flow netcdf4 numpy pyyaml matplotlib cartopy 
 ```
 
-### 5. Edit flow.cylc as needed (edit input file name/location, QC thresold value, etc.)
+### 5. Edit the workflow config (flow.cylc) as needed (input file name/location, QC thresold value, etc.)
 ```bash
 vi Cylc-8_SPEAR_Basic_QC_Workflow_Example/cylc-src/spear-qc-demo/flow.cylc
 ```
