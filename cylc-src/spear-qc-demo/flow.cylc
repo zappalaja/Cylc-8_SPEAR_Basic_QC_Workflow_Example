@@ -19,8 +19,8 @@
 [runtime]
     [[root]]
         pre-script = """
-            source ~/miniconda3/etc/profile.d/conda.sh
-            conda activate cylc
+            source /app/conda/miniforge/etc/profile.d/conda.sh
+            conda activate spear-qc-demo
         """
 
         script = """
@@ -29,12 +29,12 @@
         """
 
         [[[environment]]]
-            QC_INPUT_FILE = "/home/zappalaj/zarr_test/netcdf/pr_6hr_GFDL-SPEAR-MED_historical_r1i1p1f1_gr3_192101010300-193012312100.nc"
+            QC_INPUT_FILE = "/work/Jake.Zappala/CMIP6_output/hist_ens_01/CMIP6_output/CMIP6/SPEAR/NOAA-GFDL/GFDL-SPEAR-MED/historical/r1i1p1f1/6hr/pr/gr3/v20251126/pr_6hr_GFDL-SPEAR-MED_historical_r1i1p1f1_gr3_192101010300-193012312100.nc"
             QC_VAR  = "pr"
             QC_LAT  = "lat"
             QC_LON  = "lon"
             QC_TIME = "time"
-            QC_THRESHOLD_MM6HR = "50.0" #typically 250
+            QC_THRESHOLD_MM6HR = "250.0" #typically 250, to test if working you can lower the value (eg. 50)
             QC_GATE_MODE = "pass"
             OMP_NUM_THREADS = "1"
             MKL_NUM_THREADS = "1"
