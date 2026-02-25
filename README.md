@@ -35,77 +35,77 @@ pr_6hr_GFDL-SPEAR-MED_historical_*.nc
 ---
 
 # Installation and Setup (On Workstation)
-### On your workstation, clone the repo:
+### 1. On your workstation, clone the repo:
 ```bash
 git clone <repo_link>
 ```
-### Load Conda:
+### 2. Load Conda:
 ```bash
 module load conda
 ```
 
-### Create and activate the cylc env:
+### 3. Create and activate the cylc env:
 ```bash
 conda create -n spear-qc-demo -y -c conda-forge python=3.11 
 conda activate spear-qc-demo 
 ```
-### Install Packages:
+### 4. Install Packages:
 ```bash
 conda install -y -c conda-forge mamba
 mamba install -y -c conda-forge cylc-flow netcdf4 numpy pyyaml matplotlib cartopy 
 ```
 
-### Edit flow.cylc as needed (edit input file name/location, QC thresold value, etc.)
+### 5. Edit flow.cylc as needed (edit input file name/location, QC thresold value, etc.)
 ```bash
-vi /path/flow.cylc
+vi Cylc-8_SPEAR_Basic_QC_Workflow_Example/cylc-src/spear-qc-demo/flow.cylc
 ```
 
-### Create cylc-run directory in /work
+### 6. Create cylc-run directory in /work
 ```bash
 mkdir -p /work/FIRST.LAST/cylc-run
 ```
 
-### Create cylc config directory
+### 7. Create cylc config directory
 ```bash
 mkdir -p ~/.cylc/flow
 ```
 
-- Copy example cylc config file to the cylc config directory, modify as needed:
+### 8. Copy example cylc config file to the cylc config directory, modify as needed:
 ```bash
-cp /path/to/file/config/global.cylc ~/.cylc/flow
+cp Cylc-8_SPEAR_Basic_QC_Workflow_Example/cylc-src/spear-qc-demo/global.cylc ~/.cylc/flow
 ```
 
-- Run it:
+### 9. Run it:
 ```bash
 cylc validate .
 cylc install --workflow-name=spear-qc-demo .
 cylc play spear-qc-demo
 ```
 
-- Check live progress of tasks with: 
+### 10. Check live progress of tasks with: 
 ```bash
 cylc tui spear-qc-demo/run1
 ```
 
-- Output (like report.txt) written to:
+### 11. Output (like report.txt) written to:
 ```bash
 ~/cylc-run/spear-qc/runN/work/
 ```
-- To stop a run:
+### 12. To stop a run:
 ```bash
 cylc stop --now spear-qc-demo/runN
 ```
 
-- To clean (needed before restarting, removes previous run output and logs)
+### 13. To clean (needed before restarting, removes previous run output and logs)
 ```bash
 cylc clean spear-qc-demo/runN
 ```
 
-- Output PNGs are located here:
+### 14. Output PNGs are located here:
 ```bash
 /work/FIRST.LAST/cylc-run/cylc-run/spear-qc-demo/run1/outputs
 ```
-- Output report.txt file is located here:
+### 15. Output report.txt file is located here:
 ```bash
 /work/FIRST.LAST/cylc-run/cylc-run/spear-qc-demo/run1/work
 ```
